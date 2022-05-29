@@ -1,3 +1,4 @@
+from dis import disco
 import discord
 import os
 import random
@@ -36,6 +37,22 @@ class OPT(discord.Client):
             )
             embed.set_image(url=f'https://assets.ppy.sh/beatmaps/{r["beatmapset_id"]}/covers/cover.jpg')
             await message.channel.send(embed=embed)
+        
+        elif msg[0] == f'{PREFIX}mappool':
+            pool = cur.execute(f'SELECT mod, ID FROM db WHERE tournament=\'{message.content[9:]}\'').fetchall()
+            if pool:
+                embed = discord.Embed(
+                    title=message.content[9:],
+                    description='\n'.join([f'{i[0]}: {i[1]}' for i in pool])
+                )
+                await message.channel.send(embed=embed)
+            else:
+                pools = cur.execute('SELECT DISTINCT tournament FROM db').fetchall()
+                embed = discord.Embed(
+                    title='List of available mappools:',
+                    description='\n'.join([i[0] for i in pools])
+                )
+                await message.channel.send(embed=embed)
 
 if __name__ == '__main__':
     client = OPT()
