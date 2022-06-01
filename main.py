@@ -4,14 +4,12 @@ import random
 import requests
 import sqlite3
 from datetime import timedelta
-from dotenv import load_dotenv
 
-load_dotenv()
 con = sqlite3.connect('db.db')
 cur = con.cursor()
 
-API_KEY = os.getenv('API_KEY')
-TOKEN = os.getenv('TOKEN')
+API_KEY = os.environ['API_KEY']
+TOKEN = os.environ['TOKEN']
 
 PREFIX = '.'
 
