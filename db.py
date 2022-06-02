@@ -1,8 +1,6 @@
 import os
 import sqlite3
 
-from sqlalchemy import insert
-
 def insert_pool(tournament, ids, mods=[6, 3, 3, 4, 3, 0, 0, 1]):
     mods = [f'{i[0]}{j}' for i in [i for i in list(zip(['NM', 'HD', 'HR', 'DT', 'FM', 'EZ', 'HT', 'TB'], mods))] for j in range(1, i[1] + 1)]
     for i in zip(mods, ids):
