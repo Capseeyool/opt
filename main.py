@@ -44,7 +44,7 @@ class OPT(discord.Client):
                     \'{r["diff_size"]}\',
                     \'{r["diff_approach"]}\',
                     \'{r["diff_overall"]}\',
-                    \'{r["beatmapset_id"]}\',
+                    \'{r["beatmapset_id"]}\'
                 )''')
                 embed = discord.Embed(
                     title=f'{r["artist"]} - {r["title"]} [{r["version"]}]',
