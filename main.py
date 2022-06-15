@@ -33,19 +33,32 @@ class OPT(discord.Client):
                 )
             else:
                 r = requests.get(f'https://osu.ppy.sh/api/get_beatmaps?k={API_KEY}&b={m[2]}&m=0').json()[0]
-                cur.execute(f'''INSERT INTO db (artist, title, diff, SR, length, combo, BPM, CS, AR, OD, beatmapsetID) VALUES (
-                    \'{r["artist"]}\',
-                    \'{r["title"]}\',
-                    \'{r["version"]}\',
-                    \'{r["difficultyrating"]}\',
-                    \'{r["total_length"]}\',
-                    \'{r["max_combo"]}\',
-                    \'{r["bpm"]}\',
-                    \'{r["diff_size"]}\',
-                    \'{r["diff_approach"]}\',
-                    \'{r["diff_overall"]}\',
-                    \'{r["beatmapset_id"]}\'
-                )''')
+                # cur.execute(f'''INSERT INTO db (artist, title, diff, SR, length, combo, BPM, CS, AR, OD, beatmapsetID) VALUES (
+                #     \'{r["artist"]}\',
+                #     \'{r["title"]}\',
+                #     \'{r["version"]}\',
+                #     \'{r["difficultyrating"]}\',
+                #     \'{r["total_length"]}\',
+                #     \'{r["max_combo"]}\',
+                #     \'{r["bpm"]}\',
+                #     \'{r["diff_size"]}\',
+                #     \'{r["diff_approach"]}\',
+                #     \'{r["diff_overall"]}\',
+                #     \'{r["beatmapset_id"]}\'
+                # )''')
+                cur.execute(f'''UPDATE db SET
+                    artist = \'{r["artist"]}\',
+                    title = \'{r["title"]}\',
+                    diff = \'{r["version"]}\',
+                    SR = \'{r["difficultyrating"]}\',
+                    length = \'{r["total_length"]}\',
+                    combo = \'{r["max_combo"]}\',
+                    BPM = \'{r["bpm"]}\',
+                    CS = \'{r["diff_size"]}\',
+                    AR = \'{r["diff_approach"]}\',
+                    OD = \'{r["diff_overall"]}\',
+                    beatmapsetID = \'{r["beatmapset_id"]}\'
+                WHERE tournament = {m[0]} AND mod = {m[1]}''')
                 embed = discord.Embed(
                     title=f'{r["artist"]} - {r["title"]} [{r["version"]}]',
                     description=f'{m[0]} | {m[1]} | {m[2]}\n'
