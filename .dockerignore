@@ -1,3 +1,5 @@
+venv
+.env
 .gitignore
 db.db
 READMD.md

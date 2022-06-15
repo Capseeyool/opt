@@ -1,12 +1,20 @@
 import os
 import sqlite3
 
-from sqlalchemy import insert
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.environ['API_KEY']
 
 def insert_pool(tournament, ids, mods=[6, 3, 3, 4, 3, 0, 0, 1]):
     mods = [f'{i[0]}{j}' for i in [i for i in list(zip(['NM', 'HD', 'HR', 'DT', 'FM', 'EZ', 'HT', 'TB'], mods))] for j in range(1, i[1] + 1)]
     for i in zip(mods, ids):
-        cur.execute(f'INSERT INTO db (tournament, mod, ID) VALUES (\'{tournament}\', \'{i[0]}\', {i[1]})')
+        cur.execute(f'''INSERT INTO db (tournament, mod, ID) VALUES (
+            \'{tournament}\',
+            \'{i[0]}\',
+            {i[1]}
+        )''')
 
 if os.path.exists('db.db'):
     os.remove('db.db')
@@ -15,10 +23,21 @@ con = sqlite3.connect('db.db')
 cur = con.cursor()
 
 cur.execute('''CREATE TABLE db (
-tournament VARCHAR(255) NOT NULL,
-mod VARCHAR(3) NOT NULL,
-ID INT NOT NULL,
-FOREIGN KEY (ID) REFERENCES maps(ID)
+    tournament VARCHAR(255) NOT NULL,
+    mod VARCHAR(3) NOT NULL,
+    ID INT NOT NULL,
+    artist VARCHAR(255),
+    title VARCHAR(255),
+    diff VARCHAR(255),
+    SR FLOAT,
+    length TIME,
+    combo INT,
+    BPM INT,
+    CS FLOAT,
+    AR FLOAT,
+    OD FLOAT,
+    beatmapsetID INT,
+    PRIMARY KEY(tournament, mod)
 )''')
 
 insert_pool('OWC 2021 GF',
@@ -224,7 +243,7 @@ insert_pool('SSKC1 Tier B',
 insert_pool('SSKC2 Tier A',
 [980313, 3169485, 2908767, 1754868, 2178004, 65233, 1760024, 2623949, 2569702, 2255706, 3158333],
 [4, 2, 2, 2, 0, 0, 0, 1])
-insert_pool('SSKC1 Tier B',
+insert_pool('SSKC2 Tier B',
 [2197486, 2606880, 890811, 2617306, 1971493, 2131582, 1971633, 2467479, 2090356, 2601595, 1968436],
 [4, 2, 2, 2, 0, 0, 0, 1])
 
