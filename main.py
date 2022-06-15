@@ -4,10 +4,6 @@ import random
 import requests
 import sqlite3
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 con = sqlite3.connect('db.db')
 cur = con.cursor()
 
