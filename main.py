@@ -38,7 +38,7 @@ class OPT(discord.Client):
                     \'{r["title"]}\',
                     \'{r["version"]}\',
                     \'{r["difficultyrating"]}\',
-                    \'{r["length"]}\',
+                    \'{r["total_length"]}\',
                     \'{r["max_combo"]}\',
                     \'{r["bpm"]}\',
                     \'{r["diff_size"]}\',
