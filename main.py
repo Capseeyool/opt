@@ -50,14 +50,14 @@ class OPT(discord.Client):
                     artist = \'{r["artist"]}\',
                     title = \'{r["title"]}\',
                     diff = \'{r["version"]}\',
-                    SR = \'{r["difficultyrating"]}\',
-                    length = \'{r["total_length"]}\',
-                    combo = \'{r["max_combo"]}\',
-                    BPM = \'{r["bpm"]}\',
-                    CS = \'{r["diff_size"]}\',
-                    AR = \'{r["diff_approach"]}\',
-                    OD = \'{r["diff_overall"]}\',
-                    beatmapsetID = \'{r["beatmapset_id"]}\'
+                    SR = {r["difficultyrating"]},
+                    length = {r["total_length"]},
+                    combo = {r["max_combo"]},
+                    BPM = {r["bpm"]},
+                    CS = {r["diff_size"]},
+                    AR = {r["diff_approach"]},
+                    OD = {r["diff_overall"]},
+                    beatmapsetID = {r["beatmapset_id"]}
                 WHERE tournament = {m[0]} AND mod = {m[1]}''')
                 embed = discord.Embed(
                     title=f'{r["artist"]} - {r["title"]} [{r["version"]}]',

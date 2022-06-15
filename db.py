@@ -24,7 +24,7 @@ cur.execute('''CREATE TABLE db (
     title VARCHAR(255),
     diff VARCHAR(255),
     SR FLOAT,
-    length TIME,
+    length INT,
     combo INT,
     BPM INT,
     CS FLOAT,
