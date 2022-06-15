@@ -33,7 +33,7 @@ class OPT(discord.Client):
                 )
             else:
                 r = requests.get(f'https://osu.ppy.sh/api/get_beatmaps?k={API_KEY}&b={m[2]}&m=0').json()[0]
-                cur.execute(f'''INSERT INTO db (artist, title, diff, SR, length, combo, BPM, CS, AR, OD) VALUES (
+                cur.execute(f'''INSERT INTO db (artist, title, diff, SR, length, combo, BPM, CS, AR, OD, beatmapsetID) VALUES (
                     \'{r["artist"]}\',
                     \'{r["title"]}\',
                     \'{r["version"]}\',
