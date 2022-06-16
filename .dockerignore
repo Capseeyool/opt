@@ -1,4 +1,4 @@
 venv
 .gitignore
-db.db
+db.py
 READMD.md
